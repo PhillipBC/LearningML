@@ -1,11 +1,12 @@
 \documentclass[12pt,a4paper]{article}
-\usepackage{amsmath,amssymb,bbm,graphicx}
+\usepackage{amsmath,amssymb,graphicx}
+\usepackage{bbm}
 \usepackage{authblk}
 \usepackage{faktor}
 \usepackage{caption}
 \usepackage{subcaption}
 \usepackage{float}
-\usepackage{tcolorbox}
+% \usepackage{tcolorbox}
 \usepackage[utf8]{inputenc}
 \usepackage[english]{babel}
 \usepackage{listings}
@@ -23,7 +24,102 @@
 \maketitle
 
 
-\section{Learning a quadratic function}
+\section{Overall plan}
+
+(v.1: Masud, August 2019)
+
+The current idea of the project:
+
+\begin{center}\emph{Fitness landscape of 3-node and 4-node neural networks}
+\end{center}
+
+Restricting to one input node and one output node, we can think of three network geometries:
+
+\begin{center}
+\begin{tabular}{l|l}
+\hline
+%
+\parbox{0.42\textwidth}{ 
+%
+
+\begin{center}\includegraphics[width=0.4\textwidth]{Images/3_architectures_a_01}
+\end{center}
+
+
+} &   \hspace{-0.01\textwidth}
+\parbox{0.48\textwidth}{ \flushleft
+
+\begin{itemize}
+
+\item[(A)] One hidden layer, containing a single hidden node. \\ 4 parameters. 
+
+\bigskip 
+
+\item[(B)] Two hidden layers, each containing a single node. 
+  \\ 6 parameters.
+  
+\bigskip 
+
+\item[(C)] One hidden layer, consisting of two nodes. 
+  \\ 7 parameters.
+  
+\end{itemize}
+
+} 
+\\
+\hline
+\end{tabular}
+\end{center}
+
+
+
+We can then explore and describe the landscape of the loss function for the same (or similar)
+learning task in these three cases.  In addition, we can explore and describe how the gradient descent moves us along
+this landscape.
+
+The three networks have respectively 4, 6 and 7 parameters.
+
+The primary learning task with these networks will be to learn a scalar function.  The function
+$f(x) = x^2$ seems the most natural to concentrate on.  We still have to specify the domain of the
+function (interval from which $x$ is chosen) over which to concentrate on.  We might want to use the
+sigmoid function in the definition of the network; in that case the outputs are limited to $[0,1]$.
+Hence it makes sense to use the interval $[-1,1]$.
+
+The 3-node network (A) is so limited that it is not able to approximate the parabolic shape in the
+whole range $[-1,1]$ (please double-check this statement), so we will probably have to limit it to
+$[0,1]$.
+
+The choice of activation function defines the network, i.e., the loss function will depend on the
+activation function.  Let's start with the sigmoid whenever we can, and possibly play with using
+other activation functions later.
+
+
+
+\newpage 
+
+
+\section{The 3-node network}
+
+(v.1: Masud, August 2019)
+
+The function represented by the network is
+\begin{equation}
+N(x) ~=~  \sigma\Big( w_2 \sigma\big(w_1x+b_1\big) +b_2 \Big)
+\end{equation}
+So the quantity we want to analyze is
+\begin{equation}
+L(w_1,w_2,b_1,b_2) ~=~  \int_{x_{\rm min}}^{x_{\rm max}} \Big[ N(x) -x^2 \Big]^2 
+\end{equation}
+In practice we want to discretize this integral and have a sum over a grid of $x$ values.  Hopefully
+the answer does not depend much on the discretization.  
+
+
+
+\newpage
+
+\section{The diamond network}
+
+(v.1: John, August 2019)
 
 \subsection{Introduction}
 
