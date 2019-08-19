@@ -94,6 +94,61 @@ activation function.  Let's start with the sigmoid whenever we can, and possibly
 other activation functions later.
 
 
+\subsection{The functions expressed by the toy networks} 
+
+
+For the 3-node network A, the output as a function of the input $x$ is
+\begin{equation} \label{eq_intro_3node_function}
+[A]  \qquad \qquad N(x) ~=~  \sigma\Big( w^2_{11} \sigma\big(w^1_{11}x+b^1_1\big) +b^2_1 \Big)
+\end{equation}
+where the superscript/subscript notation is that of Nielsen, see, e.g., the diagram in
+%
+\\ {\tt http://neuralnetworksanddeeplearning.com/chap2.html}
+%
+\\ The same notation is probably standard elsewhere as well.  The superscripts are layer indices and
+the in the subscript $ij$ for the $w$'s, the first is an index for the nodes of the previous layer
+and the second is the index for the nodes of the current layer.  (The input layer is called layer 0
+here.)  This elaborate notation is probably overkill for the toy networks we will be using; we will
+use simpler names later on when we focus on the individual networks.
+
+The problem of learning the $x^2$ function with the network A is simply the problem of
+least-square-fitting the above nonlinear function to a dataset of the form $\{(u,u^2)\}$. 
+
+Similarly, the functions expressed by the other two networks are 
+\begin{equation} 
+[B]  \qquad \qquad N(x) ~=~   \sigma\Bigg( w^3_{11} \sigma\Big( w^2_{11} \sigma\big(w^1_{11}x+b^1_1\big) +b^2_1 \Big) +b^3_1 \Bigg)
+\end{equation}
+and 
+\begin{equation} 
+  [C]  \qquad \qquad
+N(x) ~=~  \sigma\Big( w^2_{11} \sigma\big(w^1_{11}x+b^1_1\big) + w^2_{21} \sigma\big(w^1_{12}x+b^1_2\big) +b^2_1 \Big)  
+\end{equation}
+%
+We should probably use simpler notations while discussing the individual networks.  
+
+
+\subsection{Choice of activation function}
+
+Should we choose activation functions that are well-suited for learning  the $x^2$ function, or
+choose those that are bad for the present purpose?  The suitability of the activation function
+probably affects the nature of the fitness landscape, so both might be interesting.  However, let's
+start with choosing activation functions that allow us to do a relatively good job.  
+
+Given the nature of the problem --- fitting a nonlinear (quadratic) function --- a piecewise linear
+function will probably not do a good job.  (Maybe we should check this statement.)  This rules out
+the RelU function.
+
+So let's concentrate on the sigmoid function
+\[
+\sigma(x) ~=~ \frac{1}{1+e^{-x}}
+\]
+and the softplus function
+\[
+\sigma(x) ~=~ \log(1 + e^x)
+\]
+The softplus is a rounded version of the RelU.  
+
+
 
 \newpage 
 

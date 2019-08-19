@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.17 (TeX Live 2016 on Slackware (SlackBuilds.org)) (preloaded format=pdflatex 2017.2.28)  18 AUG 2019 19:23
+This is pdfTeX, Version 3.14159265-2.6-1.40.17 (TeX Live 2016 on Slackware (SlackBuilds.org)) (preloaded format=pdflatex 2017.2.28)  19 AUG 2019 11:35
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -633,66 +633,66 @@ Package pdftex.def Info: Images/3_architectures_a_01.pdf used on input line 49.
  [1
 
 {/usr/share/texmf-var/fonts/map/pdftex/updmap/pdftex.map} <./Images/3_architect
-ures_a_01.pdf>] [2] [3]
-<Images/net_1_2_1.png, id=31, 289.08pt x 271.0125pt>
+ures_a_01.pdf>] [2] [3] [4]
+<Images/net_1_2_1.png, id=36, 289.08pt x 271.0125pt>
 File: Images/net_1_2_1.png Graphic file (type png)
 
 <use Images/net_1_2_1.png>
-Package pdftex.def Info: Images/net_1_2_1.png used on input line 130.
+Package pdftex.def Info: Images/net_1_2_1.png used on input line 185.
 (pdftex.def)             Requested size: 144.53964pt x 135.5059pt.
 
-<Images/ALearningNet1.png, id=33, 462.528pt x 346.896pt>
+<Images/ALearningNet1.png, id=38, 462.528pt x 346.896pt>
 File: Images/ALearningNet1.png Graphic file (type png)
 
 <use Images/ALearningNet1.png>
-Package pdftex.def Info: Images/ALearningNet1.png used on input line 140.
+Package pdftex.def Info: Images/ALearningNet1.png used on input line 195.
 (pdftex.def)             Requested size: 138.75946pt x 104.0696pt.
 
-Overfull \hbox (13.9566pt too wide) in paragraph at lines 140--141
+Overfull \hbox (13.9566pt too wide) in paragraph at lines 195--196
 [][] 
  []
 
-<Images/ALearningNet6.png, id=34, 462.528pt x 346.896pt>
+<Images/ALearningNet6.png, id=39, 462.528pt x 346.896pt>
 File: Images/ALearningNet6.png Graphic file (type png)
 
 <use Images/ALearningNet6.png>
-Package pdftex.def Info: Images/ALearningNet6.png used on input line 145.
+Package pdftex.def Info: Images/ALearningNet6.png used on input line 200.
 (pdftex.def)             Requested size: 138.75946pt x 104.0696pt.
 
-Overfull \hbox (13.9566pt too wide) in paragraph at lines 145--146
+Overfull \hbox (13.9566pt too wide) in paragraph at lines 200--201
 [][] 
  []
 
-<Images/ALearningNet50.png, id=35, 462.528pt x 346.896pt>
+<Images/ALearningNet50.png, id=40, 462.528pt x 346.896pt>
 File: Images/ALearningNet50.png Graphic file (type png)
 
 <use Images/ALearningNet50.png>
-Package pdftex.def Info: Images/ALearningNet50.png used on input line 150.
+Package pdftex.def Info: Images/ALearningNet50.png used on input line 205.
 (pdftex.def)             Requested size: 138.75946pt x 104.0696pt.
 
-Overfull \hbox (13.9566pt too wide) in paragraph at lines 150--151
+Overfull \hbox (13.9566pt too wide) in paragraph at lines 205--206
 [][] 
  []
 
-[4 <./Images/net_1_2_1.png>]
-<Images/LossInVicinityOfTrainedWeights.png, id=40, 462.528pt x 346.896pt>
+[5 <./Images/net_1_2_1.png>]
+<Images/LossInVicinityOfTrainedWeights.png, id=45, 462.528pt x 346.896pt>
 File: Images/LossInVicinityOfTrainedWeights.png Graphic file (type png)
 
 <use Images/LossInVicinityOfTrainedWeights.png>
 Package pdftex.def Info: Images/LossInVicinityOfTrainedWeights.png used on inpu
-t line 164.
+t line 219.
 (pdftex.def)             Requested size: 231.26343pt x 173.44757pt.
- [5 <./Images/ALearningNet1.png> <./Images/ALearningNet6.png> <./Images/ALearni
+ [6 <./Images/ALearningNet1.png> <./Images/ALearningNet6.png> <./Images/ALearni
 ngNet50.png> <./Images/LossInVicinityOfTrainedWeights.png>] (./SimpleNets.aux) 
 ) 
 Here is how much of TeX's memory you used:
- 5778 strings out of 493013
- 80888 string characters out of 6139264
- 150695 words of memory out of 5000000
- 9221 multiletter control sequences out of 15000+600000
- 10442 words of font info for 39 fonts, out of 8000000 for 9000
+ 5781 strings out of 493013
+ 80934 string characters out of 6139264
+ 150703 words of memory out of 5000000
+ 9223 multiletter control sequences out of 15000+600000
+ 10611 words of font info for 40 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 40i,12n,39p,852b,451s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 40i,12n,39p,852b,452s stack positions out of 5000i,500n,10000p,200000b,80000s
 </usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/share/t
 exmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/share/texmf-dist/font
 s/type1/public/amsfonts/cm/cmmi12.pfb></usr/share/texmf-dist/fonts/type1/public
@@ -701,11 +701,13 @@ r10.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/s
 hare/texmf-dist/fonts/type1/public/amsfonts/cm/cmr17.pfb></usr/share/texmf-dist
 /fonts/type1/public/amsfonts/cm/cmr6.pfb></usr/share/texmf-dist/fonts/type1/pub
 lic/amsfonts/cm/cmr8.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/
-cmsy10.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmti12.pfb>
-Output written on SimpleNets.pdf (5 pages, 238003 bytes).
+cmsy10.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb></us
+r/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmti12.pfb></usr/share/texmf-
+dist/fonts/type1/public/amsfonts/cm/cmtt12.pfb>
+Output written on SimpleNets.pdf (6 pages, 257792 bytes).
 PDF statistics:
- 84 PDF objects out of 1000 (max. 8388607)
- 52 compressed objects within 1 object stream
+ 95 PDF objects out of 1000 (max. 8388607)
+ 60 compressed objects within 1 object stream
  0 named destinations out of 1000 (max. 500000)
  31 words of extra memory for PDF output out of 10000 (max. 10000000)
 
