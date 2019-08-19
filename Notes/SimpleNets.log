@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.17 (TeX Live 2016 on Slackware (SlackBuilds.org)) (preloaded format=pdflatex 2017.2.28)  19 AUG 2019 11:35
+This is pdfTeX, Version 3.14159265-2.6-1.40.17 (TeX Live 2016 on Slackware (SlackBuilds.org)) (preloaded format=pdflatex 2017.2.28)  19 AUG 2019 12:42
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -633,81 +633,90 @@ Package pdftex.def Info: Images/3_architectures_a_01.pdf used on input line 49.
  [1
 
 {/usr/share/texmf-var/fonts/map/pdftex/updmap/pdftex.map} <./Images/3_architect
-ures_a_01.pdf>] [2] [3] [4]
-<Images/net_1_2_1.png, id=36, 289.08pt x 271.0125pt>
+ures_a_01.pdf>] [2] [3]
+<Images/notation_3node_a_01.pdf, id=32, 1569.7198pt x 453.5796pt>
+File: Images/notation_3node_a_01.pdf Graphic file (type pdf)
+
+<use Images/notation_3node_a_01.pdf>
+Package pdftex.def Info: Images/notation_3node_a_01.pdf used on input line 195.
+
+(pdftex.def)             Requested size: 136.50238pt x 39.4431pt.
+ [4 <./Images/notation_3node_a_01.pdf>]
+[5] <Images/net_1_2_1.png, id=55, 289.08pt x 271.0125pt>
 File: Images/net_1_2_1.png Graphic file (type png)
 
 <use Images/net_1_2_1.png>
-Package pdftex.def Info: Images/net_1_2_1.png used on input line 185.
+Package pdftex.def Info: Images/net_1_2_1.png used on input line 267.
 (pdftex.def)             Requested size: 144.53964pt x 135.5059pt.
 
-<Images/ALearningNet1.png, id=38, 462.528pt x 346.896pt>
+<Images/ALearningNet1.png, id=57, 462.528pt x 346.896pt>
 File: Images/ALearningNet1.png Graphic file (type png)
 
 <use Images/ALearningNet1.png>
-Package pdftex.def Info: Images/ALearningNet1.png used on input line 195.
+Package pdftex.def Info: Images/ALearningNet1.png used on input line 277.
 (pdftex.def)             Requested size: 138.75946pt x 104.0696pt.
 
-Overfull \hbox (13.9566pt too wide) in paragraph at lines 195--196
+Overfull \hbox (13.9566pt too wide) in paragraph at lines 277--278
 [][] 
  []
 
-<Images/ALearningNet6.png, id=39, 462.528pt x 346.896pt>
+<Images/ALearningNet6.png, id=58, 462.528pt x 346.896pt>
 File: Images/ALearningNet6.png Graphic file (type png)
 
 <use Images/ALearningNet6.png>
-Package pdftex.def Info: Images/ALearningNet6.png used on input line 200.
+Package pdftex.def Info: Images/ALearningNet6.png used on input line 282.
 (pdftex.def)             Requested size: 138.75946pt x 104.0696pt.
 
-Overfull \hbox (13.9566pt too wide) in paragraph at lines 200--201
+Overfull \hbox (13.9566pt too wide) in paragraph at lines 282--283
 [][] 
  []
 
-<Images/ALearningNet50.png, id=40, 462.528pt x 346.896pt>
+<Images/ALearningNet50.png, id=59, 462.528pt x 346.896pt>
 File: Images/ALearningNet50.png Graphic file (type png)
 
 <use Images/ALearningNet50.png>
-Package pdftex.def Info: Images/ALearningNet50.png used on input line 205.
+Package pdftex.def Info: Images/ALearningNet50.png used on input line 287.
 (pdftex.def)             Requested size: 138.75946pt x 104.0696pt.
 
-Overfull \hbox (13.9566pt too wide) in paragraph at lines 205--206
+Overfull \hbox (13.9566pt too wide) in paragraph at lines 287--288
 [][] 
  []
 
-[5 <./Images/net_1_2_1.png>]
-<Images/LossInVicinityOfTrainedWeights.png, id=45, 462.528pt x 346.896pt>
+[6 <./Images/net_1_2_1.png>]
+<Images/LossInVicinityOfTrainedWeights.png, id=64, 462.528pt x 346.896pt>
 File: Images/LossInVicinityOfTrainedWeights.png Graphic file (type png)
 
 <use Images/LossInVicinityOfTrainedWeights.png>
 Package pdftex.def Info: Images/LossInVicinityOfTrainedWeights.png used on inpu
-t line 219.
+t line 301.
 (pdftex.def)             Requested size: 231.26343pt x 173.44757pt.
- [6 <./Images/ALearningNet1.png> <./Images/ALearningNet6.png> <./Images/ALearni
+ [7 <./Images/ALearningNet1.png> <./Images/ALearningNet6.png> <./Images/ALearni
 ngNet50.png> <./Images/LossInVicinityOfTrainedWeights.png>] (./SimpleNets.aux) 
 ) 
 Here is how much of TeX's memory you used:
- 5781 strings out of 493013
- 80934 string characters out of 6139264
- 150703 words of memory out of 5000000
- 9223 multiletter control sequences out of 15000+600000
+ 5786 strings out of 493013
+ 81096 string characters out of 6139264
+ 151703 words of memory out of 5000000
+ 9227 multiletter control sequences out of 15000+600000
  10611 words of font info for 40 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 40i,12n,39p,852b,452s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 40i,16n,39p,852b,452s stack positions out of 5000i,500n,10000p,200000b,80000s
 </usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/share/t
 exmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/share/texmf-dist/font
 s/type1/public/amsfonts/cm/cmmi12.pfb></usr/share/texmf-dist/fonts/type1/public
-/amsfonts/cm/cmmi8.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cm
-r10.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/s
-hare/texmf-dist/fonts/type1/public/amsfonts/cm/cmr17.pfb></usr/share/texmf-dist
-/fonts/type1/public/amsfonts/cm/cmr6.pfb></usr/share/texmf-dist/fonts/type1/pub
-lic/amsfonts/cm/cmr8.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/
-cmsy10.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb></us
-r/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmti12.pfb></usr/share/texmf-
-dist/fonts/type1/public/amsfonts/cm/cmtt12.pfb>
-Output written on SimpleNets.pdf (6 pages, 257792 bytes).
+/amsfonts/cm/cmmi6.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cm
+mi8.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/s
+hare/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/share/texmf-dist
+/fonts/type1/public/amsfonts/cm/cmr17.pfb></usr/share/texmf-dist/fonts/type1/pu
+blic/amsfonts/cm/cmr6.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm
+/cmr8.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></us
+r/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb></usr/share/texmf-d
+ist/fonts/type1/public/amsfonts/cm/cmti12.pfb></usr/share/texmf-dist/fonts/type
+1/public/amsfonts/cm/cmtt12.pfb>
+Output written on SimpleNets.pdf (7 pages, 277731 bytes).
 PDF statistics:
- 95 PDF objects out of 1000 (max. 8388607)
- 60 compressed objects within 1 object stream
+ 119 PDF objects out of 1000 (max. 8388607)
+ 77 compressed objects within 1 object stream
  0 named destinations out of 1000 (max. 500000)
- 31 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 36 words of extra memory for PDF output out of 10000 (max. 10000000)
 

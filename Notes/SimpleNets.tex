@@ -157,6 +157,49 @@ The softplus is a rounded version of the RelU.
 
 (v.1: Masud, August 2019)
 
+\subsection{Setup}
+
+
+
+\begin{center}
+\begin{tabular}{l|l}
+%\hline
+%
+\parbox{0.48\textwidth}{ 
+%
+\raggedright
+  
+Let's simplify the notation; one index should suffice.  The four parameters are $w_1$ and $b_1$
+(determining the hidden-neuron value from the input value $x$) and $w_2$ and $b_2$ (which determine the
+final output from the hidden-neuron value).
+  
+
+
+} &   \hspace{-0.01\textwidth}
+\parbox{0.42\textwidth}{ \flushleft
+
+
+\begin{center}
+\includegraphics[width=0.35\textwidth]{Images/notation_3node_a_01}
+\end{center}
+
+\begin{gather*}
+  z_1 = w_1x + b_1
+  \\
+  z_2 = w_2\sigma(z_1) + b_2
+  \\
+  {\rm output} = \sigma(z_2)
+\end{gather*}
+
+
+} 
+\\
+%\hline
+\end{tabular}
+\end{center}
+
+
+
 The function represented by the network is
 \begin{equation}
 N(x) ~=~  \sigma\Big( w_2 \sigma\big(w_1x+b_1\big) +b_2 \Big)
@@ -167,6 +210,45 @@ L(w_1,w_2,b_1,b_2) ~=~  \int_{x_{\rm min}}^{x_{\rm max}} \Big[ N(x) -x^2 \Big]^2
 \end{equation}
 In practice we want to discretize this integral and have a sum over a grid of $x$ values.  Hopefully
 the answer does not depend much on the discretization.  
+
+Define
+\[
+x_i = x_{\rm min} + \frac{x_{\rm max} - x_{\rm min}}{n_T} i
+\qquad \qquad  \text{with} \quad i = 0, 1,\ldots, n_T
+\]
+The subscript $T$ could stand for `test', as the set of numbers $\{(x_i,x_i^2)\}$ can be regarded as
+the test set used to define the fitness function or loss function.  However, for the present
+toy problem, there is probably no harm to use the same set as the training set.
+
+The loss/fitness function we aim to analyze is thus 
+\begin{equation}
+L(w_1,w_2,b_1,b_2) ~=~  \frac{x_{\rm max} - x_{\rm min}}{n_T} \sum_{i=0}^{n_T} \Big[ N(x_i) -x_i^2 \Big]^2 
+\end{equation}
+%
+We expect that the results should not depend on $n_T$ as long as it is `large enough'; perhaps
+even $n_T=20$ is large enough. 
+
+If some other target function $f(x)$ is being trained for instead of $f(x)=x^2$, one simply replaces
+$x_i^2$ by $f(x_i)$ in the above expression.  
+
+
+\subsection{Some observations }
+
+Played with minimizing the loss function using the minimizers provided by Mathematica.  (The
+FindMinimum[] function.)
+
+The performance of this primitive network as a learner/predictor is rather limited --- it seems not
+able to fit even roughly the $x^2$ function in the range (-1,1).  Using the sigmoid function, it
+even has difficulty fitting in the range (0,1).  The  Softplus function does a better job.
+
+The landscape seems interesting enough --- there are multiple minima for sure.  It also parameter
+regimes in which the loss function stays essentially constant, and sometimes very sharp increases
+near a minimum.
+
+\subsection{Some results and plots}
+
+
+
 
 
 
