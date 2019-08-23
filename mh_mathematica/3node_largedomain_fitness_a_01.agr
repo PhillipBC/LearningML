@@ -1,6 +1,6 @@
 # Grace project file
 #
-@version 50123
+@version 50125
 @page size 792, 612
 @page scroll 5%
 @page inout 5%
@@ -47,14 +47,14 @@
 @default symbol size 1.000000
 @default sformat "%.8g"
 @background color 0
-@page background fill on
+@page background fill off
 @timestamp off
 @timestamp 0.03, 0.03
 @timestamp color 1
 @timestamp rot 0
 @timestamp font 0
 @timestamp char size 1.000000
-@timestamp def "Mon Aug 19 18:19:20 2019"
+@timestamp def "Fri Aug 23 21:58:59 2019"
 @with string
 @    string on
 @    string loctype view
@@ -111,7 +111,7 @@
 @g0 fixedpoint format general general
 @g0 fixedpoint prec 6, 6
 @with g0
-@    world -60, 0.1, 60, 0.5
+@    world -60, 0, 60, 0.45
 @    stack world 0, 0, 0, 0
 @    znorm 1
 @    view 0.100000, 0.500000, 0.600000, 0.800000

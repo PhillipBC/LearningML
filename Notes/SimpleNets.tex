@@ -244,7 +244,7 @@ results.
 Let's provide results below for $n_T=100$.  
 
 
-\subsubsection{Fitting to the domain $x\in[-1,1]$}
+\subsubsection{Fitting to the domain $x\in[-1,1]$, sigmoid}
 
 The performance of this primitive network as a learner/predictor is rather limited --- it seems not
 able to fit even roughly the $x^2$ function in the domain [-1,1].  
@@ -264,6 +264,17 @@ those parameter regions.  This probably has to do with the large value of $b_1$.
 to understand this better, e.g., whether the loss function becomes constant as any one of the
 parameters become very large.  
 
+The experimentation strongly suggests that there is only the pair or minima described above.  It
+would be good to prove or disprove this rigorously!!   
+
+Are there interesting structures other than the minima, e.g., saddle points?  
+
+
+
+\paragraph{Visualizing the structure near the pair of minima.}
+
+Below we show the variation of the cost function in the four directions.  In each plot, one
+parameter is varied while the other three are held fixed at the minimal value.
 
 \smallskip
 
@@ -272,14 +283,37 @@ parameters become very large.
 \end{center}
 
 
+What happens away from the minima?  Does the fitness function become flat?  
+
+Keeping $w_2$ and $b_1$ fixed at the values found at the minima, we plot $L$ as a function of $w_1$
+for various values of $b_2$.  
+
+
+\smallskip
+
+\begin{center}
+\includegraphics[width=0.79\textwidth]{Images/3node_largedomain_fitness_vs_w1_varyb2_a_01.pdf}
+\end{center}
+
+As one goes away in either the negative $b_2$ or the positive $b_2$ direction, the $w_1$-dependence
+becomes flat.   This can also be visualized through a 3D plot:
+
+\smallskip
+
+\begin{center}
+\includegraphics[width=0.79\textwidth]{Images/3node_largedomain_fitness_vs_w1_b2_3dplot.pdf}
+\end{center}
+
+For large negative $b_2$, the loss function settles to a value around $0.42$;  for large positive
+$b_2$, a value around $1.07$.  These correspond to predicted functions that are constant at $0$ and
+$1$, respectively.  They are certainly not minima!   
+
+
+
+
 TODO: add a few plots of the loss function as a function of parameters around other parameter
 points, e.g., with one of the parameters large.  
 
-
-The experimentation strongly suggests that there is only the pair or minima described above.  It
-would be good to prove or disprove this rigorously!!   
-
-Are there interesting structures other than the minima, e.g., saddle points?  
 
 
 \newpage
