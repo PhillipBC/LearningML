@@ -1,0 +1,19 @@
+
+* Review on deep learning in nature: 
+
+https://www.nature.com/articles/nature14539
+
+
+* Mehta et al's review on machine learning:
+
+https://arxiv.org/abs/1803.08823
+
+
+* Online book by Nielsen: 
+
+http://neuralnetworksanddeeplearning.com/
+
+
+* Online book by Goodfellow, Bengio, Courville: 
+
+http://www.deeplearningbook.org/

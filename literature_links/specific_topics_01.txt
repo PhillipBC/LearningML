@@ -1,0 +1,35 @@
+
+* On Activation functions:
+
+ https://arxiv.org/abs/1511.07289
+
+
+
+* On landscapes and minima, recent: 
+
+ https://arxiv.org/abs/1901.02302
+
+ https://arxiv.org/abs/1703.04933
+
+ https://arxiv.org/abs/1712.09913
+
+(The last two are also supposed to talk about why neural networks work
+so well.)
+
+
+* On landscapes and minima, older: 
+
+A few older works related to landscape and/or local minima:
+
+https://www.sciencedirect.com/science/article/pii/S0893608000000095
+
+http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.123.2949&rep=rep1&type=pdf
+
+https://ieeexplore.ieee.org/abstract/document/4633895
+
+
+* Papers on XOR:
+
+https://www.sciencedirect.com/science/article/pii/S0893608097001342
+
+https://journals.aps.org/pre/abstract/10.1103/PhysRevE.97.052307
