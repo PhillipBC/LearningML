@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.17 (TeX Live 2016/TeX Live for SUSE Linux) (preloaded format=pdflatex 2018.3.14)  24 AUG 2019 20:43
+This is pdfTeX, Version 3.14159265-2.6-1.40.17 (TeX Live 2016/TeX Live for SUSE Linux) (preloaded format=pdflatex 2018.3.14)  25 AUG 2019 21:33
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -651,10 +651,10 @@ File: Images/3node_largedomain_learnedfunctions_a_01.pdf Graphic file (type pdf
 )
  <use Images/3node_largedomain_learnedfunctions_a_01.pdf>
 Package pdftex.def Info: Images/3node_largedomain_learnedfunctions_a_01.pdf use
-d on input line 258.
+d on input line 278.
 (pdftex.def)             Requested size: 386.10214pt x 279.4037pt.
- [5 <./Images/3node_largedomain_learnedfunctions_a_01.pdf>]
-Overfull \hbox (2.18065pt too wide) in paragraph at lines 276--277
+ [5]
+Overfull \hbox (2.18065pt too wide) in paragraph at lines 296--297
 []\OT1/cmr/m/n/12 Are there in-ter-est-ing struc-tures other than the min-ima, 
 e.g., sad-dle points? 
  []
@@ -663,58 +663,58 @@ e.g., sad-dle points?
 
 pdfTeX warning: pdflatex (file ./Images/3node_largedomain_fitness_a_01.pdf): PD
 F inclusion: found PDF version <1.7>, but at most version <1.5> allowed
-<Images/3node_largedomain_fitness_a_01.pdf, id=68, 777.90625pt x 557.08125pt>
+<Images/3node_largedomain_fitness_a_01.pdf, id=56, 777.90625pt x 557.08125pt>
 File: Images/3node_largedomain_fitness_a_01.pdf Graphic file (type pdf)
 
 <use Images/3node_largedomain_fitness_a_01.pdf>
 Package pdftex.def Info: Images/3node_largedomain_fitness_a_01.pdf used on inpu
-t line 288.
+t line 308.
 (pdftex.def)             Requested size: 386.10214pt x 276.50835pt.
-
+ [6 <./Images/3node_largedomain_learnedfunctions_a_01.pdf>]
 
 pdfTeX warning: pdflatex (file ./Images/3node_largedomain_fitness_vs_w1_varyb2_
 a_01.pdf): PDF inclusion: found PDF version <1.7>, but at most version <1.5> al
 lowed
 
-<Images/3node_largedomain_fitness_vs_w1_varyb2_a_01.pdf, id=69, 716.6775pt x 39
+<Images/3node_largedomain_fitness_vs_w1_varyb2_a_01.pdf, id=72, 716.6775pt x 39
 0.45876pt>
 File: Images/3node_largedomain_fitness_vs_w1_varyb2_a_01.pdf Graphic file (type
  pdf)
  <use Images/3node_largedomain_fitness_vs_w1_varyb2_a_01.pdf>
 Package pdftex.def Info: Images/3node_largedomain_fitness_vs_w1_varyb2_a_01.pdf
- used on input line 313.
+ used on input line 333.
 (pdftex.def)             Requested size: 315.89905pt x 172.10623pt.
 
-Overfull \hbox (16.22308pt too wide) in paragraph at lines 302--329
+Overfull \hbox (16.22308pt too wide) in paragraph at lines 322--349
  [] 
  []
 
-[6 <./Images/3node_largedomain_fitness_a_01.pdf>]
-<Images/3node_largedomain_fitness_vs_w1_b2_3dplot.pdf, id=85, 361.35pt x 281.05
-pt>
+[7 <./Images/3node_largedomain_fitness_a_01.pdf> <./Images/3node_largedomain_fi
+tness_vs_w1_varyb2_a_01.pdf>]
+<Images/3node_largedomain_fitness_vs_w1_b2_3dplot.pdf, id=101, 361.35pt x 281.0
+5pt>
 File: Images/3node_largedomain_fitness_vs_w1_b2_3dplot.pdf Graphic file (type p
 df)
  <use Images/3node_largedomain_fitness_vs_w1_b2_3dplot.pdf>
 Package pdftex.def Info: Images/3node_largedomain_fitness_vs_w1_b2_3dplot.pdf u
-sed on input line 338.
+sed on input line 358.
 (pdftex.def)             Requested size: 308.09738pt x 239.63123pt.
- [7 <./Images/3node_largedomain_fitness_vs_w1_varyb2_a_01.pdf> <./Images/3node_
-largedomain_fitness_vs_w1_b2_3dplot.pdf>] [8] [9]
+ [8 <./Images/3node_largedomain_fitness_vs_w1_b2_3dplot.pdf>] [9]
 <Images/net_1_2_1.png, id=114, 289.08pt x 271.0125pt>
 File: Images/net_1_2_1.png Graphic file (type png)
 
 <use Images/net_1_2_1.png>
-Package pdftex.def Info: Images/net_1_2_1.png used on input line 391.
+Package pdftex.def Info: Images/net_1_2_1.png used on input line 411.
 (pdftex.def)             Requested size: 144.53964pt x 135.5059pt.
 
 <Images/ALearningNet1.png, id=116, 462.528pt x 346.896pt>
 File: Images/ALearningNet1.png Graphic file (type png)
 
 <use Images/ALearningNet1.png>
-Package pdftex.def Info: Images/ALearningNet1.png used on input line 401.
+Package pdftex.def Info: Images/ALearningNet1.png used on input line 421.
 (pdftex.def)             Requested size: 138.75946pt x 104.0696pt.
 
-Overfull \hbox (13.9566pt too wide) in paragraph at lines 401--402
+Overfull \hbox (13.9566pt too wide) in paragraph at lines 421--422
 [][] 
  []
 
@@ -722,10 +722,10 @@ Overfull \hbox (13.9566pt too wide) in paragraph at lines 401--402
 File: Images/ALearningNet6.png Graphic file (type png)
 
 <use Images/ALearningNet6.png>
-Package pdftex.def Info: Images/ALearningNet6.png used on input line 406.
+Package pdftex.def Info: Images/ALearningNet6.png used on input line 426.
 (pdftex.def)             Requested size: 138.75946pt x 104.0696pt.
 
-Overfull \hbox (13.9566pt too wide) in paragraph at lines 406--407
+Overfull \hbox (13.9566pt too wide) in paragraph at lines 426--427
 [][] 
  []
 
@@ -733,10 +733,10 @@ Overfull \hbox (13.9566pt too wide) in paragraph at lines 406--407
 File: Images/ALearningNet50.png Graphic file (type png)
 
 <use Images/ALearningNet50.png>
-Package pdftex.def Info: Images/ALearningNet50.png used on input line 411.
+Package pdftex.def Info: Images/ALearningNet50.png used on input line 431.
 (pdftex.def)             Requested size: 138.75946pt x 104.0696pt.
 
-Overfull \hbox (13.9566pt too wide) in paragraph at lines 411--412
+Overfull \hbox (13.9566pt too wide) in paragraph at lines 431--432
 [][] 
  []
 
@@ -746,19 +746,15 @@ File: Images/LossInVicinityOfTrainedWeights.png Graphic file (type png)
 
 <use Images/LossInVicinityOfTrainedWeights.png>
 Package pdftex.def Info: Images/LossInVicinityOfTrainedWeights.png used on inpu
-t line 425.
+t line 445.
 (pdftex.def)             Requested size: 231.26343pt x 173.44757pt.
  [11 <./Images/ALearningNet1.png> <./Images/ALearningNet6.png> <./Images/ALearn
 ingNet50.png> <./Images/LossInVicinityOfTrainedWeights.png>] (./SimpleNets.aux)
-
-
-LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
-
  ) 
 Here is how much of TeX's memory you used:
  5796 strings out of 494041
  81352 string characters out of 6158516
- 148839 words of memory out of 5000000
+ 148840 words of memory out of 5000000
  9069 multiletter control sequences out of 15000+600000
  10918 words of font info for 41 fonts, out of 8000000 for 9000
  475 hyphenation exceptions out of 8191
@@ -774,7 +770,7 @@ fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/share/texmf/fonts/type1/public/am
 sfonts/cm/cmsy10.pfb></usr/share/texmf/fonts/type1/public/amsfonts/cm/cmsy8.pfb
 ></usr/share/texmf/fonts/type1/public/amsfonts/cm/cmti12.pfb></usr/share/texmf/
 fonts/type1/public/amsfonts/cm/cmtt12.pfb>
-Output written on SimpleNets.pdf (11 pages, 658696 bytes).
+Output written on SimpleNets.pdf (11 pages, 660597 bytes).
 PDF statistics:
  178 PDF objects out of 1000 (max. 8388607)
  116 compressed objects within 2 object streams

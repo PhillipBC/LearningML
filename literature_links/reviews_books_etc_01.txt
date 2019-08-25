@@ -1,4 +1,15 @@
 
+===============================
+
+List of Reviews and lecture notes and leglly-online-avaiable
+texts.  
+
+First list is reviews/notes on all of machine learning or deep
+learning.  Later some reviews on more specialized subtopics.  
+
+===============================
+
+
 * Review on deep learning in nature: 
 
 https://www.nature.com/articles/nature14539
@@ -17,3 +28,12 @@ http://neuralnetworksanddeeplearning.com/
 * Online book by Goodfellow, Bengio, Courville: 
 
 http://www.deeplearningbook.org/
+
+
+* Course notes by Karpathy, Stanford CS231: 
+
+http://cs231n.github.io/
+
+* 1996 Book by Raul Rojas, more theoretical: 
+
+https://page.mi.fu-berlin.de/rojas/neural/

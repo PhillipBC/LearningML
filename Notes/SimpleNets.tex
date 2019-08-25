@@ -231,6 +231,10 @@ even $n_T=20$ is large enough.
 If some other target function $f(x)$ is being trained for instead of $f(x)=x^2$, one simply replaces
 $x_i^2$ by $f(x_i)$ in the above expression.  
 
+For definiteness, as we explore our different networks with different activation functions, maybe it
+makes sense to concentrate on the setup described here: using the $f(x)=x^2$ function in the range
+$(x_{\rm min},x_{\rm max}) = (-1,1)$, with $n_T=100$.  
+
 
 \subsection{Experimenting with Mathematica: Some observations}
 
@@ -243,12 +247,28 @@ results.
 
 Let's provide results below for $n_T=100$.  
 
+The performance of this primitive network as a learner/predictor is rather limited --- it seems not
+able to fit even roughly the $x^2$ function in the domain [-1,1].  
+
 
 \subsubsection{Fitting to the domain $x\in[-1,1]$, sigmoid}
 
-The performance of this primitive network as a learner/predictor is rather limited --- it seems not
-able to fit even roughly the $x^2$ function in the domain [-1,1].  In the figure, some parameter
-values returned by the Mathematica minimizer are shown, together with the corresponding learned function.
+Results for the case of a sigmoid activation function, learning the $f(x)=x^2$ function in the range
+$(x_{\rm min},x_{\rm max}) = (-1,1)$, with $n_T=100$.  
+
+Before presenting results, we comment on the expected dependence on the $b_2$ parameter.  For finite
+values of the other three parameters, if $b_2$ is very large and positive, the output is $1$ for any input, and
+if $b_2$ is very large and negative, the output will be $0$ for any inptut value of $x$.  This also
+means that the cost function $L$ changes from one plateau ($\approx0.4203$) to another
+($\approx1.067$) as $b_2$ is changed from large negative to large positive.  
+
+In fact, if $w_2=0$ then $N(x)=\sigma(b_2)$ and $L=\int{}dx[\sigma(b_2)-f(x)]^2$, and there is no
+dependence on the first-layer parameters $w_1$ and $b_1$.  
+
+Now let's look at some data.  
+
+In the figure, some parameter values returned by the Mathematica minimizers are shown, together with
+the corresponding learned function.
 
 
 

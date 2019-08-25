@@ -3,6 +3,7 @@
 
  https://arxiv.org/abs/1511.07289
 
+ https://arxiv.org/abs/1502.01852
 
 
 * On landscapes and minima, recent: 
@@ -33,3 +34,16 @@ https://ieeexplore.ieee.org/abstract/document/4633895
 https://www.sciencedirect.com/science/article/pii/S0893608097001342
 
 https://journals.aps.org/pre/abstract/10.1103/PhysRevE.97.052307
+
+
+* Convolutional neural networks: 
+
+https://arxiv.org/abs/1512.07108
+
+http://neuralnetworksanddeeplearning.com/chap6.html
+
+http://cs231n.github.io/convolutional-networks/
+
+https://www.datascience.com/blog/convolutional-neural-network
+
+

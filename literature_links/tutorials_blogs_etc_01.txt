@@ -1,0 +1,21 @@
+
+
+ ===============================
+
+Some places which collect tutorials/ blog articles etc on machine
+learning.  (Quality of articles often vary widely)
+
+===============================
+
+
+*  https://www.datascience.com/resources#.learn-data-science
+
+https://www.datascience.com/blog
+
+*  http://karpathy.github.io/
+
+*  https://hackernoon.com/tagged/machine-learning
+
+*  https://www.analyticsvidhya.com/blog/ 
+
+* https://machinelearningmastery.com/start-here/
