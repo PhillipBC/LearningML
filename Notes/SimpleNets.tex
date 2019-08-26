@@ -231,21 +231,165 @@ even $n_T=20$ is large enough.
 If some other target function $f(x)$ is being trained for instead of $f(x)=x^2$, one simply replaces
 $x_i^2$ by $f(x_i)$ in the above expression.  
 
+For definiteness, as we explore our different networks with different activation functions, maybe it
+makes sense to concentrate on the setup described here: using the $f(x)=x^2$ function in the range
+$(x_{\rm min},x_{\rm max}) = (-1,1)$, with $n_T=100$.  
 
-\subsection{Some observations }
 
-Played with minimizing the loss function using the minimizers provided by Mathematica.  (The
-FindMinimum[] function.)
+\subsection{Experimenting with Mathematica: Some observations}
+
+Played with minimizing the loss function using the minimizers provided by Mathematica, using the 
+FindMinimum[] function.  This function can take the Method option: the method can be chosen as one
+of Newton, PrincipalAxis, InteriorPoint, QuasiNewton, ConjugateGradient.  Have not dug into the
+details of any of these algorithms; presumably it's not very important.  Maybe later we can simply
+re-explore this system with the Stocahstic Gradient Descent, but I assume we will get the same
+results.  
+
+Let's provide results below for $n_T=100$.  
 
 The performance of this primitive network as a learner/predictor is rather limited --- it seems not
-able to fit even roughly the $x^2$ function in the range (-1,1).  Using the sigmoid function, it
-even has difficulty fitting in the range (0,1).  The  Softplus function does a better job.
+able to fit even roughly the $x^2$ function in the domain [-1,1].  
 
-The landscape seems interesting enough --- there are multiple minima for sure.  It also parameter
-regimes in which the loss function stays essentially constant, and sometimes very sharp increases
-near a minimum.
 
-\subsection{Some results and plots}
+\subsubsection{Fitting to the domain $x\in[-1,1]$, sigmoid}
+
+Results for the case of a sigmoid activation function, learning the $f(x)=x^2$ function in the range
+$(x_{\rm min},x_{\rm max}) = (-1,1)$, with $n_T=100$.  
+
+Before presenting results, we comment on the expected dependence on the $b_2$ parameter.  For finite
+values of the other three parameters, if $b_2$ is very large and positive, the output is $1$ for any input, and
+if $b_2$ is very large and negative, the output will be $0$ for any inptut value of $x$.  This also
+means that the cost function $L$ changes from one plateau ($\approx0.4203$) to another
+($\approx1.067$) as $b_2$ is changed from large negative to large positive.  
+
+In fact, if $w_2=0$ then $N(x)=\sigma(b_2)$ and $L=\int{}dx[\sigma(b_2)-f(x)]^2$, and there is no
+dependence on the first-layer parameters $w_1$ and $b_1$.  
+
+Now let's look at some data.  
+
+In the figure, some parameter values returned by the Mathematica minimizers are shown, together with
+the corresponding learned function.
+
+
+
+\smallskip
+
+\begin{center}
+\includegraphics[width=0.99\textwidth]{Images/3node_largedomain_learnedfunctions_a_01}
+\end{center}
+
+The points shown on the top really are minima: one can see this by varying one of the parameters and
+holding the others fixed at this point.  (Shown below.)  These two minima are mirrors of each other,
+with $w_1$ value flipped.
+
+The parameter values on the bottom row are not really minima --- the loss function is constant in
+those parameter regions.  These are regions where one of the $b_{1,2}$ is very large.  The cost
+function tends to become constant in such regions.  Presumably, this is a feature of the sigmoid
+function.  
+
+It would be good to understand this better, e.g., whether the loss function becomes constant as any
+one of the parameters become very large.
+
+The experimentation strongly suggests that there is only the pair or minima described above.  It
+would be good to prove or disprove this rigorously!!   
+
+Are there interesting structures other than the minima, e.g., saddle points?  
+
+
+
+\paragraph{Visualizing the structure near the pair of minima.}
+
+Below we show the variation of the cost function in the four directions.  In each plot, one
+parameter is varied while the other three are held fixed at the minimal value.
+
+\smallskip
+
+\begin{center}
+\includegraphics[width=0.99\textwidth]{Images/3node_largedomain_fitness_a_01}
+\end{center}
+
+
+What happens away from the minima?  Does the fitness function become flat?  
+
+Keeping $w_2$ and $b_1$ fixed at the values found at the minima, we plot $L$ as a function of $w_1$
+for various values of $b_2$.  
+
+
+\smallskip
+
+
+\begin{center}
+\begin{tabular}{ll}
+%\hline
+%
+\parbox{0.82\textwidth}{ 
+%
+
+\begin{flushleft}
+\includegraphics[width=0.81\textwidth]{Images/3node_largedomain_fitness_vs_w1_varyb2_a_01.pdf}
+\end{flushleft}
+
+
+} &   \hspace{-0.01\textwidth}
+\parbox{0.16\textwidth}{ \centering
+
+Held fixed: 
+
+\begin{gather*}
+  w_2 = 3.954
+  \\
+  b_1 = -8.585
+\end{gather*}
+
+
+} 
+\\
+%\hline
+\end{tabular}
+\end{center}
+
+
+As one goes away in either the negative $b_2$ or the positive $b_2$ direction, the $w_1$-dependence
+becomes flat.   This can also be visualized through a 3D plot:
+
+\smallskip
+
+\begin{center}
+\includegraphics[width=0.79\textwidth]{Images/3node_largedomain_fitness_vs_w1_b2_3dplot.pdf}
+\end{center}
+
+For large negative $b_2$, the loss function settles to a value around $0.42$;  for large positive
+$b_2$, a value around $1.07$.  These correspond to predicted functions that are constant at $0$ and
+$1$, respectively.  They are certainly not minima!   
+
+
+TODO: add a few plots of the loss function as a function of parameters around other parameter
+points, e.g., with one of the parameters large.  
+
+
+
+\newpage
+
+\subsubsection{Fitting to the domain $x\in[0,1]$}
+
+Question: should we do this?  Or should we restrict to the same problem and domain  $x\in[-1,1]$ for
+each of the three networks.  
+
+Below some old comments from initial pre-exploration; need to be double-checked.
+
+Using the sigmoid function, the 3-node network even has difficulty fitting in the range (0,1).  The Softplus
+function does a better job.
+
+The landscape seems interesting enough --- there are multiple minima. (DOUBLE-CHECK THIS STATEMENT.
+If true, it is an interesting contrast with fitting in the domain  $x\in[-1,1]$.  In the
+restricted domain the model is not as high-bias as in the larger domain  $x\in[-1,1]$.  Maybe the
+number of minima is related to how unsuitable the model is?)
+
+
+It also has parameter regimes in which the loss function stays essentially constant, and sometimes
+very sharp increases near a minimum.
+
+
 
 
 
