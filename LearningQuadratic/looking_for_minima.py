@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
-Created on Wed Aug  7 14:59:47 2019
+Created on Mon Aug 19 12:57:18 2019
 
 @author: john
 """
@@ -64,22 +64,6 @@ biases = net.biases
 
 
 
-# %% plot network output as it learned    
-print('plot network output as it learned')
-plt.figure(1)
-for i in range(num):
-    plt.clf()
-    plt.plot(xs, ys, 'o', markerSize=1, label='data')
-    plt.plot(x,y[i,:],lw=4,label='net')
-    plt.title('Epoch {0}'.format(i))
-    plt.xlabel('x')
-    plt.ylabel('y')
-    plt.grid()
-    plt.legend()
-    plt.pause(0.02)
-    
-    
-    
 # %% evaluate cost
 print('evaluate cost')
 
@@ -109,7 +93,9 @@ for param in chain(weights,biases):
 
 
 # %% plot the graphs  
-plt.figure(2)
+cs = []
+            
+plt.figure(1)
 for pic in range(c.shape[0]):
     plt.plot(10*x, c[pic,:], label='{0}'.format(pic) )
 
@@ -117,3 +103,19 @@ plt.title(r'Loss of net in vicinity of trained weigths $\omega_i$')
 plt.xlabel(r'$\delta \omega_i$')
 plt.ylabel(r'Loss$(\omega +\delta \omega_i)$')
 plt.legend()
+
+cs.append(c)
+
+
+# %% save the weights
+ws = []
+        
+ws.append( [ wi for w in chain(weights, biases) for wi in w.reshape(w.size) ] )
+
+
+
+# %%  plot the weights
+plt.figure(2) 
+for wsi in ws:   
+    print(wsi)
+    plt.plot(wsi)

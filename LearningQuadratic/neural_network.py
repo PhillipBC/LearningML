@@ -169,6 +169,134 @@ class NeuralNetwork:
             
             for mini_batch in mini_batches:
                 self.update(mini_batch, eta)
+    
+    
+    
+    def get_hessian(self, a, y):
+        from itertools import chain
+        
+        num_param = sum( [w.size for w in chain(self.weights, self.biases)] )
+        
+        H = np.zeros([num_param, num_param])
+        
+        # Forward propagation
+        activations = [ a ]
+        zeds = []
+        
+        deltas = []
+        
+        g = [ [None]*(self.num_layers-1) for i in range(self.num_layers-1)]
+        B = [ [None]*(self.num_layers-1) for i in range(self.num_layers-1)]
+        
+        for W, b in zip( self.weights, self.biases ):
+            z = W.dot( a ) + b
+            a = sigmoid( z )
+            
+            activations.append( a )
+            zeds.append( z )
+            
+        for p in range(self.num_layers-1):
+            
+            gqp = np.eye(self.layer_sizes[p+1])
+            g[p][p] = gqp
+            
+            for q in range(p+1, self.num_layers-1):
+                gqp = (self.weights[q]*(sigmoid_prime(zeds[q-1]).T)).dot( g[q-1][p] )
+                g[q][p] = gqp
+                g[p][q] = 0*gqp.T
+
+        # gradient of Euclidean distance w.r.t. to z for the output layer:
+        delta = (a - y) * sigmoid_prime(z)
+        deltas.insert(0, delta)
+        
+#        # gradients w.r.t. weight matrices and bias vectors will be stored here
+#        nWs = [ np.dot(delta, activations[-2].T) ]
+#        nbs = [ delta ]
+        
+        
+        # Back propagation
+        for W, z, a in zip( reversed(self.weights[1:]), 
+                            reversed(zeds[:-1]),
+                            reversed(activations[:-2]) ):
+            
+            delta = W.T.dot(delta) * sigmoid_prime( z )
+            deltas.insert(0, delta)
+            
+#            nWs.append( np.dot(delta, a.T) )
+#            nbs.append( delta )
+#        nWs.reverse()
+#        nbs.reverse()
+            
+        HL = np.eye(self.layer_sizes[-1]).dot( np.diag(sigmoid_prime(zeds[-1]).flatten()) )
+        HL = np.diag(sigmoid_prime(zeds[-1]).flatten()).dot(HL)
+        HL += np.diag(sigmoid_double_prime(zeds[-1]).flatten()).dot( np.diag((activations[-1]-y).flatten()) )
+        
+        for p in range(self.num_layers-1):
+            B[-1][p] = HL.dot( g[-1][p] )
+            
+        for p in range(self.num_layers-1):
+            for q in range(self.num_layers-2,-1,-1):
+                B[q][p] = self.weights[q+1].T.dot(B[q+1][p])*sigmoid_prime(zeds[q])
+                B[q][p]+= self.weights[q+1].T.dot(deltas[q+1])*sigmoid_double_prime(zeds[q])*g[q][p]
+        
+        
+        # Construct Hessian
+        for hc in range(num_param):
+            for hr in range(hc, num_param):
+                H[hc,hr] = 1
+        HH = []
+#        temp = [ [None]*(self.num_layers-1) for i in range(self.num_layers-1)]
+           
+        for p in range(self.num_layers-1):
+#            print('p is {0}'.format(p))
+            w = self.weights[p]
+            b = self.biases[p]
+            omega = np.hstack( (w, b) )
+            n,m = omega.shape
+            enm = np.zeros((n,m))
+            
+            for i in range(n):
+                for j in range(m):
+                    enm[i,j] = 1
+#                    print(enm)
+                    
+                    hr = np.asarray([])
+                    
+                    for q in range(self.num_layers-1):
+#                        print('q is {0}'.format(q))
+                        hh = np.dot( B[q][p], enm )
+                        hh = hh.dot( np.vstack((activations[p],1)) )
+                        hh = hh.dot( np.vstack((activations[q],1)).T )
+                        
+#                        hh+= deltas[q].dot( ( np.vstack( (np.diag( sigmoid_prime(zeds[q-1]).flatten() ) , np.zeros((1,len(zeds[q-1])))) ).dot(g[q-1][p].dot(enm).dot(np.vstack((activations[p],1)))) ).T )
+#                        hh+= deltas[q].dot( 
+#                                ( np.vstack( (np.diag(sigmoid_prime(zeds[q-1]).flatten() ), 
+#                                              np.zeros((1,len(zeds[q-1])))) ).dot(g[q-1][p]
+#                                       .dot(enm).dot(np.vstack((activations[p],1)))) ).T )
+                        if q:
+                            hh2 = np.vstack( (np.diag(sigmoid_prime(zeds[q-1]).flatten() ), np.zeros((1,len(zeds[q-1])))) )
+#                            print(hh2)
+                            hh2 = hh2.dot( g[q-1][p] )
+                            hh2 = hh2.dot( enm )
+                            hh2 = hh2.dot( np.vstack((activations[p],1)) )
+                            hh2 = deltas[q].dot( hh2.T )
+                        else:
+                            hh2 = 0
+                        
+#                        print(hh.shape)
+#                        print(hh2.shape)
+
+#                        print(hh.shape)
+                        hr = np.hstack( (hr, (hh+hh2).flatten()) )
+#                        print(hr)
+                    
+#                    print(hr.shape)
+                    HH.append(hr)
+                    
+                    enm[i,j] = 0
+                    
+        
+        return H, g, deltas, HL, B, num_param, activations, np.asarray(HH), zeds
                     
     
 
@@ -181,3 +309,33 @@ def sigmoid(z):
 def sigmoid_prime(z):
     sig = sigmoid(z)
     return sig*(1-sig)
+
+
+def sigmoid_double_prime(z):
+    sig = sigmoid(z)
+    return sig*(1-sig)*(1-2*sig)
+
+
+if __name__ == '__main__':
+    net = NeuralNetwork([1,2,1])
+    
+    x = np.asarray([1]).reshape(1,1)
+    y = np.asarray([1]).reshape(1,1)
+    
+    H,g,deltas, HL, B, num, activations, HH, zeds = net.get_hessian(x, y)
+    
+    ddww11 = sigmoid_double_prime(zeds[1])*zeds[0][0]*zeds[0][0]
+    
+    ddww2 = sigmoid_double_prime(zeds[1])*zeds[0][0] * net.weights[1] + sigmoid_prime(zeds[1])*np.asarray([1,0]).reshape(1,2)
+    ddww1 = np.diag( sigmoid_prime(zeds[0]).flatten() ).dot( np.asarray([x,0]).reshape(2,1) )
+    
+    ddww = np.dot( ddww2, ddww1 )
+    
+#    np.dot( (sigmoid_double_prime(zeds[-1]) * net.weights[1][0,0]).reshape([1,2]) , net.weights[1] ).dot( sigmoid_prime(zeds[0]).reshape([2,1]) ) * x \
+#         + sigmoid_prime(zeds[1]).dot( np.asarray([1,0]).reshape((1,2)) ).dot( sigmoid(zeds[0]]) ) * x
+    
+    print(HH.shape)
+    
+#    for q in range(net.num_layers-1):
+#        for p in range(net.num_layers-1):
+#            print('The shape of B with q={0} and p={1} is {2}'.format(q,p,B[q][p].shape) )
