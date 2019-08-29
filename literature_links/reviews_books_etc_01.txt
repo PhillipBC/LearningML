@@ -34,6 +34,17 @@ http://www.deeplearningbook.org/
 
 http://cs231n.github.io/
 
+
+* 2014 book by Shai Shalev-Shwartz and Shai Ben-David, online: 
+
+https://www.cs.huji.ac.il/~shais/UnderstandingMachineLearning/copy.html
+
+
+* Carleo et al's review "Machine Learning and the Physical Sciences": 
+
+https://arxiv.org/abs/1903.10563
+
+
 * 1996 Book by Raul Rojas, more theoretical: 
 
 https://page.mi.fu-berlin.de/rojas/neural/

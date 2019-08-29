@@ -5,6 +5,8 @@
 
  https://arxiv.org/abs/1502.01852
 
+https://arxiv.org/abs/1603.00391
+
 
 * On landscapes and minima, recent: 
 
@@ -45,5 +47,31 @@ http://neuralnetworksanddeeplearning.com/chap6.html
 http://cs231n.github.io/convolutional-networks/
 
 https://www.datascience.com/blog/convolutional-neural-network
+
+
+* Generalization: 
+
+https://arxiv.org/abs/1611.03530
+
+https://arxiv.org/abs/1802.08760
+
+
+* Generative Adversarial Networks: 
+
+https://arxiv.org/abs/1511.06434
+
+
+* Dropout and Maxout: 
+
+https://arxiv.org/abs/1302.4389
+
+https://arxiv.org/abs/1904.13310 
+
+
+
+
+
+
+
 
 
