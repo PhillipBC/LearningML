@@ -148,6 +148,29 @@ and the softplus function
 \]
 The softplus is a rounded version of the RelU.  
 
+(v.1: John, August 2019)
+For the sigmoid activation function, we can already say something about the fitness landscape where some of the network parameters are large. If we denote the affine transformation from layer $i-1$ to layer $i$ by $\omega_i$:
+\[
+\omega_i(a_{i-1}) = w_ia_{a-1} + b_i,
+\]
+then, for a given network input $x$, the fitness of the network, as a function of $\omega_i$ can be written as
+\[
+L(\omega_i) = L\circ\sigma_n\circ\omega_n\circ\cdots
+				\circ\omega_{i+1}\circ\sigma_i\circ
+				\mbox{Eval}_{a_{i-1}}(\omega_i),
+\]
+where $a_{i-1}$ is the activation vector of layer $i-1$ after $x$ has been fed into the network and Eval$_{a_{i-1}}$ is the evaluation map: $\mbox{Eval}_{a_{i-1}}(\omega_i) = \omega_i(a_{i-1})$. The exterior derivative of this is:
+\[
+dL(\omega_i) = dL (d\sigma_n) (d\omega_n) \cdots
+				(d\omega_{i+1}) (d\sigma_i)
+				d\mbox{Eval}_{a_{i-1}}(\omega_i),
+\]
+where the Jacobi matrix $d\omega_i = W_i$ is the $i$-th weight matrix and $d\sigma_i$ is a diagonal matrix whose diagonal is obtained by evaluating $\frac{d\sigma}{dx}=\sigma(x)(1-\sigma(x))$ on each component of the vector $z_i = \omega_i(a_{i-1})$. Heuristically, if any of the network parameters defining the map $\omega_i$ are large then some of the components of the output $\omega_i(a_{i-1})$ may also be large. If that is the case then the derivative of the sigmoid function evaluated on that component will be close to zero and the corresponding component of $dL(\omega_i)$ will be small, suggesting the fitness landscape is almost flat in directions where the large parameters change. Looking at a component of the vector $\omega_i(a_{i-1})$:
+\[
+\left(\omega_i(a_{i-1})\right)_k = b_j + \sum_j W_{kj}(a_{i-1})_j
+\]
+This component will be large, for the given input, if the network parameters are large and don't cancel each other. Hence, we can at least say the fitness landscape is almost flat, where any one the network parameters defining $\omega_i$ is large, in the direction that increases/decreases that parameter while keeping the other parameters fixed. 
+
 
 
 \newpage 
