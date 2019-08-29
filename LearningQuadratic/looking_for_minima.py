@@ -6,7 +6,9 @@ Created on Mon Aug 19 12:57:18 2019
 @author: john
 """
 
+
 import numpy as np
+import numpy.linalg as ln
 import neural_network as nn
 import matplotlib.pyplot as plt
 
@@ -30,12 +32,20 @@ def loss(net, xs, ys):
 
 
 
+def net_output(net, xs):
+    ys = list( map(net.feed_forward, xs ) )
+    return np.asarray(ys).flatten()
+
+
+
 # %% Generate training data
 print('Generate training data')
 
 xs = np.arange(-1,1,0.01)
 num_rand_points = len(xs)
+#net_A = nn.NeuralNetwork([1,1,1,1])
 ys = func(xs)
+#ys = net_output(net_A, xs)
 training_data = [ (x,y) for x,y in zip(xs, ys) ]
 
 
@@ -45,6 +55,7 @@ print('Train network')
 
 # Set up network and domain, number of epochs and array for output
 net = nn.NeuralNetwork([1,2,1])
+#net.set_weights_biases(net_A.weights, net_A.biases)
 x = np.arange(-1,1,0.01)
 num = 1000
 y = np.zeros([num+1,len(x)])
@@ -55,13 +66,21 @@ y[0,:] = np.asarray( list(map(net.feed_forward, x)) ).reshape(len(x))
 # Start training and saving the output of the network
 for i in range(1,num+1):
     
-    net.stochastic_gradient_decent(training_data, 1, 50, 3.0)
+    net.stochastic_gradient_decent(training_data, 1, 50, 0.5)
     
     y[i,:] = np.asarray( list(map(net.feed_forward, x)) ).reshape(len(x))
+    
 
 weights = net.weights
 biases = net.biases
 
+H = np.zeros([net.num_param,net.num_param])
+
+for xi,yi in training_data:
+    H += net.get_hessian_eiji(xi, yi)
+
+eig_vals, eig_vecs = ln.eigh(H)
+print('There are {0} positive eigenvalues'.format(len(*np.where(eig_vals>0))))
 
 
 # %% evaluate cost

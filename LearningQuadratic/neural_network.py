@@ -8,6 +8,7 @@ Created on Fri Aug  2 12:58:33 2019
 
 import numpy as np
 import random
+from itertools import chain
 
 
 class NeuralNetwork:
@@ -38,6 +39,8 @@ class NeuralNetwork:
         self.biases = [ np.random.randn(n,1) for n in layer_sizes[1:] ]
         self.weights= [ np.random.randn(n,m)
                         for n, m in zip(layer_sizes[1:], layer_sizes[:-1]) ]
+        self.num_param = sum( [w.size for w in chain(self.weights, 
+                                                     self.biases)] )
     
     
     
@@ -172,131 +175,108 @@ class NeuralNetwork:
     
     
     
-    def get_hessian(self, a, y):
-        from itertools import chain
+    def get_hessian(self, a, target_y):
+        """
+        This method will calculate the Hessian matrix of the neural network, 
+        with respect to the weights and biases, using the method outlined in
+        'Second-order stagewise backpropagation for Hessian-matrix analyses and
+        investigation of negative curvature' by Mizutani and Dreyfus (2008)
         
-        num_param = sum( [w.size for w in chain(self.weights, self.biases)] )
+        The parameter a is an input to the neural network and target_y
+        is the desired outcome
+        """
+        from scipy.linalg import block_diag
+        N = self.num_layers
         
-        H = np.zeros([num_param, num_param])
+        # Allocate memory to store neuron activations y, neuron inputs x,
+        # blocks of the Hessian and the F matrices
+        ys = [ a ]
+        xs = []
+        Hs = [ [None]*(N-1) for i in range(N-1)]
+        Fs = [ [None]*(N-1) for i in range(N-1)]
         
-        # Forward propagation
-        activations = [ a ]
-        zeds = []
         
-        deltas = []
-        
-        g = [ [None]*(self.num_layers-1) for i in range(self.num_layers-1)]
-        B = [ [None]*(self.num_layers-1) for i in range(self.num_layers-1)]
-        
+        # Forward propagation to calculate xs and ys
         for W, b in zip( self.weights, self.biases ):
-            z = W.dot( a ) + b
-            a = sigmoid( z )
+            x = W.dot( a ) + b
+            a = sigmoid( x )
             
-            activations.append( a )
-            zeds.append( z )
+            ys.append( a )
+            xs.append( x )
             
-        for p in range(self.num_layers-1):
-            
-            gqp = np.eye(self.layer_sizes[p+1])
-            g[p][p] = gqp
-            
-            for q in range(p+1, self.num_layers-1):
-                gqp = (self.weights[q]*(sigmoid_prime(zeds[q-1]).T)).dot( g[q-1][p] )
-                g[q][p] = gqp
-                g[p][q] = 0*gqp.T
-
-        # gradient of Euclidean distance w.r.t. to z for the output layer:
-        delta = (a - y) * sigmoid_prime(z)
-        deltas.insert(0, delta)
+        # xi is the derivative of the loss function w.r.t. the last activation
+        # vector yn
+        xi = (a - target_y)
         
-#        # gradients w.r.t. weight matrices and bias vectors will be stored here
-#        nWs = [ np.dot(delta, activations[-2].T) ]
-#        nbs = [ delta ]
+        # delta is the derivative of the loss function w.r.t. the last input
+        # vector xn
+        delta = xi * sigmoid_prime(x)
         
         
-        # Back propagation
-        for W, z, a in zip( reversed(self.weights[1:]), 
-                            reversed(zeds[:-1]),
-                            reversed(activations[:-2]) ):
-            
-            delta = W.T.dot(delta) * sigmoid_prime( z )
-            deltas.insert(0, delta)
-            
-#            nWs.append( np.dot(delta, a.T) )
-#            nbs.append( delta )
-#        nWs.reverse()
-#        nbs.reverse()
-            
-        HL = np.eye(self.layer_sizes[-1]).dot( np.diag(sigmoid_prime(zeds[-1]).flatten()) )
-        HL = np.diag(sigmoid_prime(zeds[-1]).flatten()).dot(HL)
-        HL += np.diag(sigmoid_double_prime(zeds[-1]).flatten()).dot( np.diag((activations[-1]-y).flatten()) )
-        
-        for p in range(self.num_layers-1):
-            B[-1][p] = HL.dot( g[-1][p] )
-            
-        for p in range(self.num_layers-1):
-            for q in range(self.num_layers-2,-1,-1):
-                B[q][p] = self.weights[q+1].T.dot(B[q+1][p])*sigmoid_prime(zeds[q])
-                B[q][p]+= self.weights[q+1].T.dot(deltas[q+1])*sigmoid_double_prime(zeds[q])*g[q][p]
+        # Calculate Z using eqn (5) in Mizutani and Dreyfus (2008)
+        # Note Hessian of the quadratic loss function is an Identity matrix
+        dsig = np.diag( sigmoid_prime(x).flatten() )
+        Z = dsig.T.dot( np.eye(self.layer_sizes[-1]) ).dot( dsig )
+        Z += np.diag( (sigmoid_double_prime(x)*xi).flatten() )
         
         
-        # Construct Hessian
-        for hc in range(num_param):
-            for hr in range(hc, num_param):
-                H[hc,hr] = 1
-        HH = []
-#        temp = [ [None]*(self.num_layers-1) for i in range(self.num_layers-1)]
-           
-        for p in range(self.num_layers-1):
-#            print('p is {0}'.format(p))
-            w = self.weights[p]
-            b = self.biases[p]
-            omega = np.hstack( (w, b) )
-            n,m = omega.shape
-            enm = np.zeros((n,m))
+        # Back propagation to compute the blocks of the Hessian
+        for s in range(N-2, -1, -1):
             
-            for i in range(n):
-                for j in range(m):
-                    enm[i,j] = 1
-#                    print(enm)
+            # Compute the derivative of x vector associated with layer s+1
+            # w.r.t. vector of network params, theta, for layer s
+            # (i.e. w.r.t. weigths and biases which act on layer s)
+            dx_dtheta = np.vstack([1, ys[s]]).T
+            for _ in range(len(ys[s+1])-1):
+                dx_dtheta = block_diag(dx_dtheta, np.vstack([1, ys[s]]).T )
+                
+            # Get s,s, block of the Hessian using eqn (10) in Mizutani (2008)
+            Hs[s][s] = dx_dtheta.T.dot( Z ).dot( dx_dtheta )
+            
+            dsig = np.diag( sigmoid_prime(xs[s-1]).flatten() )
+            
+            if not s==N-2:
+                # Get off diagonal blocks using eqn (11) in Mizutani (2008)
+                for r in range(s+1, N-1):
+                    Hs[s][r] = dx_dtheta.T.dot( Fs[s+1][r] )
+                    Hs[r][s] = Hs[s][r].T
                     
-                    hr = np.asarray([])
-                    
-                    for q in range(self.num_layers-1):
-#                        print('q is {0}'.format(q))
-                        hh = np.dot( B[q][p], enm )
-                        hh = hh.dot( np.vstack((activations[p],1)) )
-                        hh = hh.dot( np.vstack((activations[q],1)).T )
-                        
-#                        hh+= deltas[q].dot( ( np.vstack( (np.diag( sigmoid_prime(zeds[q-1]).flatten() ) , np.zeros((1,len(zeds[q-1])))) ).dot(g[q-1][p].dot(enm).dot(np.vstack((activations[p],1)))) ).T )
-#                        hh+= deltas[q].dot( 
-#                                ( np.vstack( (np.diag(sigmoid_prime(zeds[q-1]).flatten() ), 
-#                                              np.zeros((1,len(zeds[q-1])))) ).dot(g[q-1][p]
-#                                       .dot(enm).dot(np.vstack((activations[p],1)))) ).T )
-                        if q:
-                            hh2 = np.vstack( (np.diag(sigmoid_prime(zeds[q-1]).flatten() ), np.zeros((1,len(zeds[q-1])))) )
-#                            print(hh2)
-                            hh2 = hh2.dot( g[q-1][p] )
-                            hh2 = hh2.dot( enm )
-                            hh2 = hh2.dot( np.vstack((activations[p],1)) )
-                            hh2 = deltas[q].dot( hh2.T )
-                        else:
-                            hh2 = 0
-                        
-#                        print(hh.shape)
-#                        print(hh2.shape)
-
-#                        print(hh.shape)
-                        hr = np.hstack( (hr, (hh+hh2).flatten()) )
-#                        print(hr)
-                    
-#                    print(hr.shape)
-                    HH.append(hr)
-                    
-                    enm[i,j] = 0
-                    
+                if s==0:
+                    # convert Hessian into numpy array before returning
+                    H = np.vstack( [np.hstack(h) for h in Hs] )
+                    return H
+                
+                # Get off diagonal Fs using eqn (9) in Mizutani (2008)
+                for r in range(s+1, N-1):
+                    Fs[s][r] = dsig.T.dot(self.weights[s].T).dot(Fs[s+1][r])
+            
+            # Get diagonal Fs using eqn (7) in Mizutani (2008)
+            Fs[s][s] = self.weights[s].T.dot( Z ).dot( dx_dtheta )
+            
+            column_pad = np.zeros((self.layer_sizes[s],1))
+            I = np.eye(self.layer_sizes[s])
+            
+            dtheta = np.hstack([column_pad, delta[0]*I ])
+            for i in range(1,len(delta)):
+                dtheta = np.hstack([dtheta, column_pad])
+                dtheta = np.hstack([dtheta, delta[i]*I])
+            
+            Fs[s][s]+= dtheta
+            Fs[s][s] = dsig.T.dot( Fs[s][s] )
+            
+            # Update Z using eqn (5) in Mizutani (2008)
+            W = self.weights[s]
+            dsig = np.diag( sigmoid_prime(xs[s-1]).flatten() )
+            
+            xi = W.T.dot( delta )
+            delta = xi * sigmoid_prime(xs[s-1])
+            
+            Z = W.T.dot( Z ).dot( W )
+            Z = dsig.T.dot( Z ).dot( dsig )
+            Z += np.diag( (sigmoid_double_prime(xs[s-1])*xi).flatten() )
         
-        return H, g, deltas, HL, B, num_param, activations, np.asarray(HH), zeds
+        # This return statement is reached if the network has no hidden layers
+        return np.vstack( [np.hstack(h) for h in Hs] )
                     
     
 
@@ -317,25 +297,9 @@ def sigmoid_double_prime(z):
 
 
 if __name__ == '__main__':
-    net = NeuralNetwork([1,2,1])
     
-    x = np.asarray([1]).reshape(1,1)
-    y = np.asarray([1]).reshape(1,1)
-    
-    H,g,deltas, HL, B, num, activations, HH, zeds = net.get_hessian(x, y)
-    
-    ddww11 = sigmoid_double_prime(zeds[1])*zeds[0][0]*zeds[0][0]
-    
-    ddww2 = sigmoid_double_prime(zeds[1])*zeds[0][0] * net.weights[1] + sigmoid_prime(zeds[1])*np.asarray([1,0]).reshape(1,2)
-    ddww1 = np.diag( sigmoid_prime(zeds[0]).flatten() ).dot( np.asarray([x,0]).reshape(2,1) )
-    
-    ddww = np.dot( ddww2, ddww1 )
-    
-#    np.dot( (sigmoid_double_prime(zeds[-1]) * net.weights[1][0,0]).reshape([1,2]) , net.weights[1] ).dot( sigmoid_prime(zeds[0]).reshape([2,1]) ) * x \
-#         + sigmoid_prime(zeds[1]).dot( np.asarray([1,0]).reshape((1,2)) ).dot( sigmoid(zeds[0]]) ) * x
-    
-    print(HH.shape)
-    
-#    for q in range(net.num_layers-1):
-#        for p in range(net.num_layers-1):
-#            print('The shape of B with q={0} and p={1} is {2}'.format(q,p,B[q][p].shape) )
+    # Unit test for get_Hessian method
+    net = NeuralNetwork([3,4,7,2,4])
+    x = np.asarray([1,2,3]).reshape(3,1)
+    y = np.asarray([1,2,3,4]).reshape(4,1)
+    H = net.get_hessian(x, y)
