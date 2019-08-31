@@ -19,3 +19,10 @@ https://www.datascience.com/blog
 *  https://www.analyticsvidhya.com/blog/ 
 
 * https://machinelearningmastery.com/start-here/
+
+
+* The talks of this Microsoft conference: 
+
+https://www.microsoft.com/en-us/research/event/physics-ml-workshop/
+
+

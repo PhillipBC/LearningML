@@ -45,6 +45,23 @@ https://www.cs.huji.ac.il/~shais/UnderstandingMachineLearning/copy.html
 https://arxiv.org/abs/1903.10563
 
 
+* Fan et al: "A Selective Overview of Deep Learning":
+
+https://arxiv.org/abs/1904.05526
+
+
 * 1996 Book by Raul Rojas, more theoretical: 
 
 https://page.mi.fu-berlin.de/rojas/neural/
+
+
+* Review by A.Jung on Machine Learning (not focused on deep NNs)
+
+https://arxiv.org/abs/1805.05052
+
+
+* O.Simeone: "A Brief Introduction to Machine Learning for Engineers",
+more like a long review:
+
+https://arxiv.org/abs/1709.02840
+
